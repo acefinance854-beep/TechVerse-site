@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TechVerse Deals — Curated Luxury Tech</title>
+  <meta name="description" content="TechVerse Deals — curated luxury tech. Handpicked gadgets with neon-tech styling and trusted affiliate links." />
+  <style>
+    /* -----------------------
+       Basic reset & vars
+       ----------------------- */
+    :root{
+      --bg:#050406;
+      --card:#0b0f12;
+      --muted:#9aa3b2;
+      --neon:#a855f7; /* neon purple */
+      --neon-2: rgba(168,85,247,0.18);
+      --glass: rgba(255,255,255,0.03);
+      --maxw:1200px;
+      --radius:18px;
+      --ease: cubic-bezier(.16,.84,.35,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:#e9eef7;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+    a { color:inherit; text-decoration:none; }
+    .container{max-width:var(--maxw); margin:0 auto; padding:28px;}
+
+/* -----------------------
+   Animated background
+   ----------------------- */
+    .bg-wrap{position:fixed; inset:0; z-index:-2; overflow:hidden; background:linear-gradient(180deg,#040406 0%, #020204 100%);}
+    .radial{
+      position:absolute;
+      left:50%;
+      top:40%;
+      width:1600px;
+      height:1600px;
+      transform:translate(-50%,-50%) rotate(0deg);
+      background: radial-gradient(circle at 50% 50%, rgba(168,85,247,0.25) 0%, rgba(168,85,247,0.12) 10%, transparent 40%);
+      filter: blur(60px);
+      animation: float 18s linear infinite;
+      opacity:0.9;
+      mix-blend-mode:screen;
+    }
+    .radial--2{
+      left:20%;
+      top:70%;
+      width:1200px; height:1200px;
+      background: radial-gradient(circle at 30% 30%, rgba(58,140,255,0.12), transparent 30%);
+      filter: blur(100px);
+      animation: float 22s linear infinite reverse;
+      mix-blend-mode:overlay;
+    }
+    @keyframes float { from {transform:translate(-50%,-50%) rotate(0deg)} to {transform:translate(-50%,-50%) rotate(360deg)} }
+
+/* -----------------------
+   Header
+   ----------------------- */
+    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(2,2,5,0.6), rgba(2,2,5,0.2)); border-bottom:1px solid rgba(168,85,247,0.06); backdrop-filter: blur(6px);}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;max-width:var(--maxw);margin:0 auto;}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{
+      width:46px;height:46px;border-radius:10px;
+      background:linear-gradient(135deg,#6b21a8,#4c1d95);
+      display:flex;align-items:center;justify-content:center;font-weight:800;color:white;box-shadow:0 6px 30px rgba(107,33,168,0.25);
+    }
+    .brand h1{font-size:18px;margin:0;color:var(--neon);letter-spacing:0.6px}
+    nav a{margin-left:18px;font-size:14px;color:rgba(235,241,255,0.85)}
+    .cta{background:linear-gradient(90deg,var(--neon), #7c3aed); padding:10px 14px;border-radius:12px;color:#050406;font-weight:700;box-shadow:0 6px 20px rgba(168,85,247,0.18)}
+
+/* -----------------------
+   Hero
+   ----------------------- */
+    .hero{padding:80px 0; text-align:center;}
+    .hero h2{font-size:48px;margin:0 0 16px;color:var(--neon); text-shadow:0 6px 30px rgba(168,85,247,0.15)}
+    .hero p{max-width:820px;margin:0 auto;color:var(--muted);font-size:18px}
+    .btn-primary{display:inline-block;margin-top:22px;background:var(--neon);color:#050406;padding:12px 20px;border-radius:14px;font-weight:700;box-shadow:0 10px 30px rgba(168,85,247,0.12);transition:transform .25s var(--ease)}
+    .btn-primary:hover{transform:translateY(-4px);}
+
+/* -----------------------
+   Product grid + cards
+   ----------------------- */
+    .section{padding:42px 0}
+    .section h3{font-size:28px;margin-bottom:18px;color:var(--neon)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:14px;
+      border:1px solid rgba(168,85,247,0.06);
+      box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+      transition: transform .28s var(--ease), box-shadow .28s var(--ease);
+      transform-style: preserve-3d;
+      perspective: 1200px;
+      overflow:hidden;
+      position:relative;
+    }
+    .card:hover{transform:translateY(-10px) scale(1.02); box-shadow: 0 20px 50px rgba(168,85,247,0.14);}
+    .card .img-wrap{width:100%;height:400px;border-radius:12px; overflow:hidden; background:#0a0a0a; display:flex;align-items:center;justify-content:center;}
+    .card img{width:100%;height:100%;object-fit:cover;display:block;transform-origin:center;transition:transform .45s var(--ease)}
+    .card:hover img{transform:scale(1.06)}
+    .card h4{margin:12px 0 6px;color:#f6f6ff}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .card .buy{
+      display:inline-block;margin-top:12px;padding:10px 14px;background:linear-gradient(90deg,var(--neon), #7c3aed); color:#050406;border-radius:10px;font-weight:700;box-shadow:0 8px 30px rgba(124,58,237,0.12)
+    }
+    /* purple neon outline on hover */
+    .card::after{
+      content:'';position:absolute;inset:0;border-radius:var(--radius);pointer-events:none;box-shadow:0 0 60px 6px rgba(168,85,247,0);
+      transition:box-shadow .28s var(--ease)
+    }
+    .card:hover::after{box-shadow: 0 0 60px 8px rgba(168,85,247,0.12)}
+
+/* -----------------------
+   Testimonials + CTA
+   ----------------------- */
+    .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .testimonial{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:14px;padding:18px;border:1px solid rgba(168,85,247,0.05)}
+    .testimonial p{color:var(--muted);margin:0 0 10px}
+    .testimonial h5{margin:0;color:var(--neon);font-weight:700}
+
+/* -----------------------
+   Footer
+   ----------------------- */
+    footer{padding:28px 0 60px;color:var(--muted);border-top:1px solid rgba(168,85,247,0.03);margin-top:40px;text-align:center}
+
+/* -----------------------
+   Tilt / small devices
+   ----------------------- */
+    @media (max-width:640px){
+      .hero h2{font-size:32px}
+      .card .img-wrap{height:160px}
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Animated background layers -->
+  <div class="bg-wrap" aria-hidden="true">
+    <div class="radial"></div>
+    <div class="radial radial--2"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav container">
+      <div class="brand">
+        <div class="logo">TV</div>
+        <div>
+          <h1>TechVerse Deals</h1>
+          <div style="font-size:12px;color:var(--muted)">Curated luxury tech</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#products">Products</a>
+        <a href="#testimonials">Testimonials</a>
+        <a class="cta" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero container">
+      <h2>Welcome To TechVerse</h2>
+      <p>Handpicked gadgets with a luxury touch. Honest reviews, fast links to buy, and products we actually use.</p>
+      <a class="btn-primary" href="#products">Explore Featured Picks</a>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="section container">
+      <h3>Featured products</h3>
+      <div class="grid">
+        <!-- Card 1 -->
+        <article class="card" data-tilt>
+          <div class="img-wrap">
+            <!-- Place image files in images/ with given filenames -->
+            <img src="images/file_00000000642461f5888644cb1ada93ab.png" alt="Macro Photography Lens">
+          </div>
+          <h4>Macro Photography Lens</h4>
+          <p>200X macro clip-on lens for stunning smartphone photography high precision and clarity for detailed shots.</p>
+          <a class="buy" href="https://amzn.to/46O64o3" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card" data-tilt>
+          <div class="img-wrap">
+            <img src="images/file_000000006fa46230b6c7f2b351b40ce6.png" alt="Ray-Ban Smart Glasses">
+          </div>
+          <h4>Ray-Ban Smart Glasses</h4>
+          <p>Iconic Ray-Ban style with smart functionality, take hands-free photos and calls with integrated tech.</p>
+          <a class="buy" href="https://amzn.to/4pJp92c" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card" data-tilt>
+          <div class="img-wrap">
+            <img src="images/file_000000004698720cb6309d9a947b6baa.png" alt="Sleeping Headphones">
+          </div>
+          <h4>Musicozy Sleeping Headphones</h4>
+          <p>Comfortable Bluetooth headband headphones designed for sleep, relaxation, and focused rest.</p>
+          <a class="buy" href="https://amzn.to/49g23KP" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
+        </article>
+      
+        <!-- Card 4 -->
+        <article class="card" data-tilt>
+          <div class="img-wrap">
+            <img src="images/file_000000001ba06230a0e67919f04d4b6c.png" alt="Airmoto Smart Air Pump">
+          </div>
+          <h4>Airmoto Smart Air Pump</h4>
+          <p>Portable electric air compressor with digital display inflate your tyres, balls, and more with precision and style.</p>
+          <a class="buy" href="https://amzn.to/48vuwvr" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
+        </article>
+      
+        <!-- Card 5 -->
+        <article class="card" data-tilt>
+          <div class="img-wrap">
+            <img src="images/file_000000009860620ca905d53b50bb7a0f.png" alt="Levitating Globe">
+          </div>
+          <h4>Ray-Ban Smart Glasses</h4>
+          <p>Mesmerising magnetic globe that floats and spins in mid-air perfect for your desk or home decor setup.</p>
+          <a class="buy" href="https://amzn.to/3KUgBW6" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
+        </article>
+         </div>
+          </section>
+
+    <!-- Testimonials + CTA -->
+    <section id="testimonials" class="section container">
+      <h3>What customers say</h3>
+      <div class="test-grid">
+        <div class="testimonial">
+          <p>"Absolutely love the quality and design. The headphones transformed my sleep routine."</p>
+          <h5>Samantha R.</h5>
+        </div>
+        <div class="testimonial">
+          <p>"Fast shipping and excellent product descriptions. The smart glasses are a conversation starter."</p>
+          <h5>Jordan M.</h5>
+        </div>
+        <div class="testimonial">
+          <p>"Top-notch customer experience buying was simple and the product exceeded my expectations."</p>
+          <h5>Priya K.</h5>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:28px">
+        <a class="btn-primary" href="#contact">Contact & Partnerships</a>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section container" style="padding-bottom:66px">
+      <h3 style="margin-bottom:12px">Get in touch</h3>
+      <p style="color:var(--muted); max-width:760px">Questions, partnership ideas, or want custom product pages? Drop us a message.</p>
+
+      <form id="contact-form" style="max-width:820px;margin-top:18px;display:grid;gap:10px">
+        <input type="text" name="name" placeholder="Your name" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:inherit">
+        <input type="email" name="email" placeholder="Email" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:inherit">
+        <textarea name="message" rows="5" placeholder="Message" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:inherit"></textarea>
+        <button type="submit" class="btn-primary" style="width:160px">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="opacity:.9">© <span id="year"></span> TechVerse Deals - Affiliate links may earn a commission at no extra cost to you.</div>
+    </div>
+  </footer>
+
+  <script>
+    // show year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Small tilt effect for .card elements
+    (function(){
+      const cards = document.querySelectorAll('[data-tilt]');
+      cards.forEach(card => {
+        const height = card.offsetHeight;
+        const width = card.offsetWidth;
+        card.addEventListener('mousemove', handleMove);
+        card.addEventListener('mouseleave', handleLeave);
+        function handleMove(e){
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left; // x position within the card
+          const y = e.clientY - rect.top;  // y position within the card
+          const rotateY = ((x - width/2) / width) * 10; // -10deg .. 10deg
+          const rotateX = ((y - height/2) / height) * -8; // -8deg .. 8deg
+          card.style.transform = `perspective(1000px) translateY(-8px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+          // subtle image parallax
+          const img = card.querySelector('img');
+          if(img) img.style.transform = `translate(${(rotateY/2)}px, ${(rotateX/2)}px) scale(1.06)`;
+        }
+        function handleLeave(){
+          card.style.transform = '';
+          const img = card.querySelector('img');
+          if(img) img.style.transform = '';
+        }
+      });
+    })();
+
+    // Smooth anchor scrolling
+    (function(){
+      const links = document.querySelectorAll('a[href^="#"]');
+      links.forEach(a => {
+        a.addEventListener('click', function(e){
+          const targetId = this.getAttribute('href').substring(1);
+          const target = document.getElementById(targetId);
+          if(target){
+            e.preventDefault();
+            target.scrollIntoView({behavior:'smooth', block:'start'});
+          }
+        });
+      });
+    })();
+
+    // Contact form simple handler (no backend). Replace with your own endpoint if needed.
+    document.getElementById('contact-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Thanks! Message received locally. Connect this form to your email or backend to collect messages.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
